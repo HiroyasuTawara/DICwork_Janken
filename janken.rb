@@ -38,18 +38,13 @@ end
 # 二つの値の比較、結果の出力、GameStartループ判定用のboolean値を返すロジック
 class Janken
   def pon(player_hand, enemy_hand)
-    # 変数「janken」に["グー", "チョキ", "パー"]を代入します。
+    # 出力用
     janken = ["グー", "チョキ", "パー"]
-    #「相手の手は#{相手の手}です。」と出力させます。
     puts "相手の手は#{janken[enemy_hand]}です。"
-    # Playerクラスの戻り値とEnemyクラスの戻り値からじゃんけんするロジックを作成します。
+    # PlayerクラスとEnemyクラスの戻り値からじゃんけんするロジック
     if player_hand == enemy_hand
-			# Playerクラスの戻り値(player_hand)とEnemyクラスの戻り値(enemy_hand)の値が同じだった場合
-      # 「あいこ」を出力します。
       puts "あいこ"
 			true
-      #「true」を返してじゃんけんを繰り返し実行させます。
-      # ヒント：「return」を使って戻り値を返すことができます。しかし、Rubyでは戻り値を返す場合、「return」を省略するのが一般的です。
     elsif ((player_hand) - (enemy_hand) + 3) % 3 == 2
       puts "あなたの勝ちです"
     	false
@@ -59,25 +54,21 @@ class Janken
     end
   end
 end
-# じゃんけんゲームを実行するロジックを書きます。
+
+# じゃんけんゲームを実行するロジック
 class GameStart
-  # selfを使用することで、GameStartをインスタンス化することなく、クラス名を使ってjankenponメソッドを呼び出せます。
   def self.jankenpon
-    # 変数「player」にPlayerをインスタンス化したものを代入します。
     player = Player.new
-    # 変数「enemy」にEnemyをインスタンス化したものを代入します。
     enemy = Enemy.new
-    # 変数「janken」にJankenをインスタンス化したものを代入します。
     janken = Janken.new
-    # 変数「next_game」に「true」を代入しましょう。
+    # ループ判定用変数「next_game」に初期値「true」を代入
 		next_game = true
-    # 「next_game」が「false」だと繰り返し処理を終了し、「true」だと繰り返し処理を継続します。
+    # 「next_game」が「false」だと繰り返し処理を終了する
     while next_game 
-      # 変数「next_game」にじゃんけんを実行して返ってきた値(戻り値)を代入します。
-      #「janken.pon(player.hand, enemy.hand)」でじゃんけんを実行しています。
+      # 変数「next_game」にjanken.ponの戻り値を代入。
       next_game = janken.pon(player.hand, enemy.hand)
     end
   end
 end
-# クラス名を使ってjankenponメソッドを呼び出します。
+
 GameStart.jankenpon
